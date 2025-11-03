@@ -16,6 +16,7 @@ export interface FinancialRatios {
 }
 
 export interface BalanceSheetData {
+  companyName: string;
   currentAssets: number;
   currentLiabilities: number;
   inventory: number;

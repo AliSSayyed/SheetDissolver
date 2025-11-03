@@ -1,17 +1,24 @@
-import { FinancialRatios } from '../types';
-import { RatioCard } from './RatioCard';
+import { FinancialRatios, BalanceSheetData } from "../types";
+import { RatioCard } from "./RatioCard";
 
 interface DashboardProps {
   ratios: FinancialRatios;
+  balanceSheetData: BalanceSheetData;
   onReset: () => void;
 }
 
-export function Dashboard({ ratios, onReset }: DashboardProps) {
+export function Dashboard({
+  ratios,
+  balanceSheetData,
+  onReset,
+}: DashboardProps) {
   return (
     <div className="min-h-screen bg-black py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-6xl font-serif text-white mb-16 text-center">
-          Financial Analysis
+          {balanceSheetData.companyName
+            ? `Financial Analysis- ${balanceSheetData.companyName}`
+            : "Financial Analysis"}
         </h1>
 
         <div className="space-y-32">
@@ -152,6 +159,82 @@ export function Dashboard({ ratios, onReset }: DashboardProps) {
             </div>
           </section>
         </div>
+
+        <section className="border border-[#1F1F1F] rounded-2xl p-12 mt-32">
+          <h2 className="text-3xl font-serif text-white mb-8">
+            Extracted Balance Sheet Values
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Current Assets</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.currentAssets / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Current Liabilities</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.currentLiabilities / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Inventory</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.inventory / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Prepaid Expenses</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.prepaidExpenses / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Cash & Equivalents</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.cashAndEquivalents / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Total Liabilities</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.totalLiabilities / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">
+                Shareholders' Equity
+              </p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.shareholdersEquity / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Total Assets</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.totalAssets / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Long-Term Debt</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.longTermDebt / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Fixed Assets</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.fixedAssets / 1000000).toFixed(2)}M
+              </p>
+            </div>
+            <div className="bg-[#0D0D0D] border border-[#2A2A2A] rounded-lg p-4">
+              <p className="text-[#999999] text-sm mb-1">Accounts Receivable</p>
+              <p className="text-white text-lg font-semibold">
+                ${(balanceSheetData.accountsReceivable / 1000000).toFixed(2)}M
+              </p>
+            </div>
+          </div>
+        </section>
 
         <div className="flex justify-end mt-16">
           <button
