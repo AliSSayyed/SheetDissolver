@@ -52,7 +52,7 @@ Do not include any other text, explanations, or markdown formatting. Return ONLY
   };
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1/models/${geminiModel}:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: {
