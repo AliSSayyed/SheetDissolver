@@ -160,7 +160,7 @@ export function Dashboard({
           </section>
         </div>
 
-        <section className="border border-[#1F1F1F] rounded-2xl p-12 mt-32">
+        {/* <section className="border border-[#1F1F1F] rounded-2xl p-12 mt-32">
           <h2 className="text-3xl font-serif text-white mb-8">
             Extracted Balance Sheet Values
           </h2>
@@ -234,7 +234,7 @@ export function Dashboard({
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <div className="flex justify-end mt-16">
           <button
