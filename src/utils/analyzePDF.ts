@@ -4,7 +4,7 @@ export async function analyzePDF(
   base64PdfData: string
 ): Promise<BalanceSheetData> {
   const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
-  const geminiModel = import.meta.env.GOOGLE_GEMINI_MODEL;
+  const geminiModel = import.meta.env.VITE_GOOGLE_GEMINI_MODEL;
   if (!apiKey) {
     throw new Error("Google Gemini API key not configured");
   }
