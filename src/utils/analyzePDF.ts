@@ -4,7 +4,7 @@ export async function analyzePDF(
   base64PdfData: string
 ): Promise<BalanceSheetData> {
   const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
-
+  const geminiModel = import.meta.env.GOOGLE_GEMINI_MODEL;
   if (!apiKey) {
     throw new Error("Google Gemini API key not configured");
   }
@@ -52,7 +52,7 @@ Do not include any other text, explanations, or markdown formatting. Return ONLY
   };
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: {
