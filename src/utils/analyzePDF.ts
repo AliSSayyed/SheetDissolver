@@ -3,12 +3,6 @@ import { BalanceSheetData } from "../types";
 export async function analyzePDF(
   base64PdfData: string
 ): Promise<BalanceSheetData> {
-  const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
-  const geminiModel = import.meta.env.VITE_GOOGLE_GEMINI_MODEL;
-  if (!apiKey) {
-    throw new Error("Google Gemini API key not configured");
-  }
-
   const prompt = `You are a financial data extraction expert. Analyze the provided balance sheet PDF and extract the following values for the CURRENT YEAR ONLY.
 
 Return ONLY a valid JSON object with these exact fields. 
@@ -51,16 +45,13 @@ Do not include any other text, explanations, or markdown formatting. Return ONLY
     ],
   };
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1/models/${geminiModel}:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    }
-  );
+  const response = await fetch("/api/gemini", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
 
   if (!response.ok) {
     const error = await response.json();
@@ -68,7 +59,6 @@ Do not include any other text, explanations, or markdown formatting. Return ONLY
       `Gemini API error: ${error.error?.message || "Unknown error"}`
     );
   }
-
   const data = await response.json();
 
   const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
